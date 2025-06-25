@@ -14,39 +14,21 @@
 
   <!-- Statistik Hari Ini -->
   <div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-6">
-      <div class="card card-statistic-1">
-        <div class="card-icon bg-primary">
-          <i class="fas fa-user-md"></i>
-        </div>
-        <div class="card-wrap">
-          <div class="card-header"><h4>Dokter Hadir</h4></div>
-          <div class="card-body">{{ $hadir ?? 0 }}</div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-6">
-      <div class="card card-statistic-1">
-        <div class="card-icon bg-warning">
-          <i class="fas fa-calendar-minus"></i>
-        </div>
-        <div class="card-wrap">
-          <div class="card-header"><h4>Cuti</h4></div>
-          <div class="card-body">{{ $cuti ?? 0 }}</div>
+    @foreach ([['title' => 'Dokter Hadir', 'count' => $hadir ?? 0, 'icon' => 'fas fa-user-md', 'bg' => 'bg-primary'],
+              ['title' => 'Cuti', 'count' => $cuti ?? 0, 'icon' => 'fas fa-calendar-minus', 'bg' => 'bg-warning'],
+              ['title' => 'Tidak Hadir', 'count' => $tidakHadir ?? 0, 'icon' => 'fas fa-user-slash', 'bg' => 'bg-danger'] ] as $stat)
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-statistic-1">
+          <div class="card-icon {{ $stat['bg'] }}">
+            <i class="{{ $stat['icon'] }}"></i>
+          </div>
+          <div class="card-wrap">
+            <div class="card-header"><h4>{{ $stat['title'] }}</h4></div>
+            <div class="card-body">{{ $stat['count'] }}</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-6">
-      <div class="card card-statistic-1">
-        <div class="card-icon bg-danger">
-          <i class="fas fa-user-slash"></i>
-        </div>
-        <div class="card-wrap">
-          <div class="card-header"><h4>Tidak Hadir</h4></div>
-          <div class="card-body">{{ $tidakHadir ?? 0 }}</div>
-        </div>
-      </div>
-    </div>
+    @endforeach
   </div>
 
   <!-- Grafik & Pie Chart -->
@@ -55,14 +37,21 @@
     <div class="col-lg-8">
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <h4>Grafik Kehadiran Dokter</h4>
+          <div>
+            <h4>Grafik Kehadiran Dokter</h4>
+            <small class="text-muted">Periode: {{ $periodeLabel ?? '' }}</small>
+          </div>
           <form method="GET" action="{{ route('dashboard_des') }}">
-            <div class="form-group mb-0">
-              <select class="form-control form-control-sm" name="periode" onchange="this.form.submit()">
-                <option value="today" {{ request('periode') == 'today' ? 'selected' : '' }}>Hari Ini</option>
-                <option value="yesterday" {{ request('periode') == 'yesterday' ? 'selected' : '' }}>Kemarin</option>
-                <option value="7days" {{ request('periode') == '7days' || request('periode') == null ? 'selected' : '' }}>7 Hari Terakhir</option>
-              </select>
+            <div class="form-row align-items-center">
+              <div class="col-auto">
+                <select class="form-control form-control-sm" name="periode" onchange="this.form.submit()">
+                  <option value="">-- Pilih Periode Cepat --</option>
+                  <option value="today" {{ request('periode') == 'today' ? 'selected' : '' }}>Hari Ini</option>
+                  <option value="yesterday" {{ request('periode') == 'yesterday' ? 'selected' : '' }}>Kemarin</option>
+                  <option value="7days" {{ request('periode') == '7days' ? 'selected' : '' }}>7 Hari Terakhir</option>
+                  <option value="30days" {{ request('periode') == '30days' ? 'selected' : '' }}>30 Hari Terakhir</option>
+                </select>
+              </div>
             </div>
           </form>
         </div>
@@ -72,7 +61,7 @@
       </div>
     </div>
 
-    <!-- Pie Chart Kehadiran Hari Ini -->
+    <!-- Pie Chart Kehadiran -->
     <div class="col-lg-4">
       <div class="card">
         <div class="card-header">
@@ -88,13 +77,11 @@
 @endsection
 
 @push('scripts')
-<!-- Chart.js & Plugin Persentase -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Line Chart
     const ctx = document.getElementById('chartKehadiran').getContext('2d');
     new Chart(ctx, {
       type: 'line',
@@ -133,7 +120,6 @@
         scales: {
           y: {
             beginAtZero: true,
-            max: 10,
             ticks: {
               stepSize: 1,
               precision: 0
@@ -143,7 +129,6 @@
       }
     });
 
-    // Pie Chart dengan Persentase
     const pieCtx = document.getElementById('pieKehadiran').getContext('2d');
     new Chart(pieCtx, {
       type: 'pie',
@@ -167,9 +152,8 @@
             color: '#fff',
             formatter: (value, context) => {
               const data = context.chart.data.datasets[0].data;
-              const total = data.reduce((acc, val) => acc + val, 0);
-              const percentage = total ? ((value / total) * 100).toFixed(1) : 0;
-              return percentage + '%';
+              const total = data.reduce((a, b) => a + b, 0);
+              return total ? ((value / total) * 100).toFixed(1) + '%' : '0%';
             },
             font: {
               weight: 'bold',

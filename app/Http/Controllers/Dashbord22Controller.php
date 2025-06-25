@@ -45,25 +45,36 @@ class Dashbord22Controller extends Controller
         // =====================================
         $periode = $request->get('periode', '7days');
         $rangeTanggal = collect();
+        $periodeLabel = '';
 
         if ($periode === 'today') {
             $rangeTanggal->push(Carbon::today()->toDateString());
+            $periodeLabel = 'Hari Ini';
         } elseif ($periode === 'yesterday') {
             $rangeTanggal->push(Carbon::yesterday()->toDateString());
-        } else {
+            $periodeLabel = 'Kemarin';
+        } elseif ($periode === '30days') {
+            for ($i = 29; $i >= 0; $i--) {
+                $rangeTanggal->push(Carbon::today()->subDays($i)->toDateString());
+            }
+            $periodeLabel = '30 Hari Terakhir';
+        } else { // default 7days
             for ($i = 6; $i >= 0; $i--) {
                 $rangeTanggal->push(Carbon::today()->subDays($i)->toDateString());
             }
+            $periodeLabel = '7 Hari Terakhir';
         }
 
         // =====================================
-        // STATISTIK TOTAL KEHADIRAN (SEMUA DATA)
+        // STATISTIK TOTAL KEHADIRAN (filtered)
         // =====================================
-        $jadwalSemua = JadwalDokter::all();
+        $startDate = $rangeTanggal->first();
+        $endDate   = $rangeTanggal->last();
+
+        $jadwalSemua = JadwalDokter::whereBetween('tanggal', [$startDate, $endDate])->get();
         $hadir       = $jadwalSemua->where('status', 'Hadir')->count();
         $cuti        = $jadwalSemua->where('status', 'Cuti')->count();
         $tidakHadir  = $jadwalSemua->where('status', 'Tidak Hadir')->count();
-        $total       = $jadwalSemua->count();
 
         // =====================================
         // JADWAL DOKTER HARI INI (untuk tabel)
@@ -102,7 +113,8 @@ class Dashbord22Controller extends Controller
             'hadirPerHari',
             'cutiPerHari',
             'tidakHadirPerHari',
-            'periode'
+            'periode',
+            'periodeLabel'
         ));
     }
 }
