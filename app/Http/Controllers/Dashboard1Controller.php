@@ -37,6 +37,12 @@ class Dashboard1Controller extends Controller
             }
         }
 
-        return view('pages.dashboard1', compact('data', 'chartData'));
+
+
+        // Hitung total jumlah pasien
+        $jumlahPasien = StatistikPoli::sum('jumlah_pasien');
+
+        // Kirim ke view
+        return view('pages.dashboard1', compact('jumlahPasien','data', 'chartData'));
     }
 }

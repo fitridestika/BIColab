@@ -9,7 +9,7 @@
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
       <div class="breadcrumb-item">Statistik Pasien</div>
-      <div class="breadcrumb-item">Data Penyakit</div>
+      <div class="breadcrumb-item">Data Poli</div>
     </div>
   </div>
 
@@ -21,7 +21,7 @@
         @endif
         <div class="card">
           <div class="card-header">
-            <h4>Statistik Pasien per Penyakit</h4>
+            <h4>Statistik Poli per Unit</h4>
             <div class="card-header-action">
               <button class="btn btn-primary" data-toggle="modal" data-target="#tambahDataModal">
                 <i class="fas fa-plus"></i> Tambah Data
