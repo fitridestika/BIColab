@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
   <!-- Patient Statistics Card -->
-  <div class="col-lg-4 col-md-4 col-sm-12">
+  <div class="col-12">
     <div class="card card-statistic-2">
       <div class="card-stats">
         <div class="card-stats-title">Patient Statistics -
@@ -47,9 +47,11 @@
       </div>
     </div>
   </div>
+</div>
 
+<div class="row">
   <!-- Bed Occupancy Card -->
-  <div class="col-lg-4 col-md-4 col-sm-12">
+  <div class="col-lg-6 col-md-6 col-sm-12">
     <div class="card card-statistic-2">
       <div class="card-chart">
         <canvas id="balance-chart" height="80"></canvas>
@@ -69,7 +71,7 @@
   </div>
 
   <!-- Average Wait Time Card -->
-  <div class="col-lg-4 col-md-4 col-sm-12">
+  <div class="col-lg-6 col-md-6 col-sm-12">
     <div class="card card-statistic-2">
       <div class="card-chart">
         <canvas id="sales-chart" height="80"></canvas>
@@ -84,6 +86,20 @@
         <div class="card-body">
           24 min
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Pasien Lama vs Pasien Baru (Full Width) -->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4>Pasien Lama vs Pasien Baru</h4>
+      </div>
+      <div class="card-body">
+        <canvas id="myChart2sipa" height="120"></canvas>
       </div>
     </div>
   </div>
