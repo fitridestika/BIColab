@@ -18,6 +18,9 @@
           <li class="{{ request()->is('dashboard') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard') }}">Operational Dashboard</a>
           </li>
+          <li class="{{ request()->is('dashboard1') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard1') }}">Poli Dashboard By Eza</a>
+          </li>
         </ul>
       </li>
       
@@ -40,8 +43,8 @@
           <li class="{{ request()->is('patient-demographics') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('patient.demographics') }}">Demografi Pasien</a>
           </li>
-          <li class="{{ request()->is('clinic-visits') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('clinic.visits') }}">Kunjungan per Poli</a>
+          <li class="{{ request()->is('epoli.index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('epoli.index') }}">Kunjungan per Poli</a>
           </li>
         </ul>
       </li>
