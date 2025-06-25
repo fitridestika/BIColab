@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Total Pasien</h4>
+                    <h4>Jumlah Pasien</h4>
                   </div>
                   <div class="card-body">
                     10
@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>News</h4>
+                    <h4>Jumlah Unit Tersedia</h4>
                   </div>
                   <div class="card-body">
                     42

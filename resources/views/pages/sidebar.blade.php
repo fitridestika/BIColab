@@ -44,7 +44,7 @@
             <a class="nav-link" href="{{ route('patient.demographics') }}">Demografi Pasien</a>
           </li>
           <li class="{{ request()->is('epoli.index') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('epoli.index') }}">Kunjungan per Poli</a>
+            <a class="nav-link" href="{{ route('epoli.index') }}">Kunjungan per Unit</a>
           </li>
         </ul>
       </li>
