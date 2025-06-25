@@ -97,7 +97,7 @@
         <h4>Patient Visits Trend</h4>
       </div>
       <div class="card-body">
-        <canvas id="myChart" height="158"></canvas>
+        <canvas id="myChart2" height="158"></canvas>
       </div>
     </div>
   </div>

@@ -1,26 +1,38 @@
 "use strict";
 
-var ctx = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(ctx, {
-  type: 'bar', // Ganti dari 'line' ke 'bar'
+var ctx = document.getElementById("myChart2").getContext('2d');
+var myChart2 = new Chart(ctx, {
+  type: 'bar',
   data: {
     labels: ["January", "Kontrol", "March", "April", "May", "June", "July", "August"],
-    datasets: [{
-      label: 'Sales',
-      data: [3200, 1800, 4305, 3022, 6310, 5120, 5880, 6154],
-      backgroundColor: 'rgba(63,82,227,0.8)',
-      borderWidth: 0
-    },
-    {
-      label: 'Budget',
-      data: [2207, 3403, 2200, 5025, 2302, 4208, 3880, 4880],
-      backgroundColor: 'rgba(254,86,83,0.7)',
-      borderWidth: 0
-    }]
+    datasets: [
+      {
+        label: 'Sales',
+        data: [3200, 1800, 4305, 3022, 6310, 5120, 5880, 6154],
+        backgroundColor: 'rgba(63,82,227,0.8)',
+        borderWidth: 0
+      },
+      {
+        label: 'Budget',
+        data: [2207, 3403, 2200, 5025, 2302, 4208, 3880, 4880],
+        backgroundColor: 'rgba(254,86,83,0.7)',
+        borderWidth: 0
+      },
+      {
+        label: 'Trend',
+        data: [2703.5, 2601.5, 3252.5, 4023.5, 4306, 4664, 4880, 5517], // Contoh data garis (rata-rata atau lainnya)
+        type: 'line',
+        borderColor: 'rgba(0, 200, 83, 1)',
+        borderWidth: 2,
+        fill: false,
+        pointBackgroundColor: 'rgba(0, 200, 83, 1)',
+        pointRadius: 4
+      }
+    ]
   },
   options: {
     legend: {
-      display: true // tampilkan label dataset
+      display: true
     },
     scales: {
       yAxes: [{
@@ -109,7 +121,7 @@ var sales_chart_bg_color = sales_chart.createLinearGradient(0, 0, 0, 80);
 balance_chart_bg_color.addColorStop(0, 'rgba(63,82,227,.2)');
 balance_chart_bg_color.addColorStop(1, 'rgba(63,82,227,0)');
 
-var myChart = new Chart(sales_chart, {
+var myChart2 = new Chart(sales_chart, {
   type: 'line',
   data: {
     labels: ['16-07-2018', '17-07-2018', '18-07-2018', '19-07-2018', '20-07-2018', '21-07-2018', '22-07-2018', '23-07-2018', '24-07-2018', '25-07-2018', '26-07-2018', '27-07-2018', '28-07-2018', '29-07-2018', '30-07-2018', '31-07-2018'],
