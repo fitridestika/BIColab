@@ -52,7 +52,7 @@
                       <td>{{ $item->tahun }}</td>
                       <td>{{ $item->unit_rs ?? '-' }}</td>
                       <td>
-                        <form action="{{ url('/statistik/' . $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
+                        <form action="{{ url('/statistikPoli/' . $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
                           @csrf
                           @method('DELETE')
                           <button class="btn btn-sm btn-danger">Hapus</button>
@@ -77,7 +77,7 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="tambahDataModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <form action="{{ url('/statistik') }}" method="POST">
+      <form action="{{ url('/statistikPoli') }}" method="POST">
         @csrf
         <div class="modal-header">
           <h5 class="modal-title">Tambah Data Pasien per Penyakit</h5>
