@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StatistikPenyakitController;
 use App\Http\Controllers\Dashboard1Controller;
 use App\Http\Controllers\StatistikPoliController;
+use App\Http\Controllers\KunjunganPasienController;
 
 // Dashboard Routes
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -16,9 +17,11 @@ Route::get('/disease-dashboard', function () {
 
 // Patient Care Routes
 
-Route::get('/seasonal-trend', function () {
-    return view('pages.seasonal-trend');
-})->name('seasonal.trend');
+
+Route::get('/kunjungan', [KunjunganPasienController::class, 'index'])->name('pages.kunjunganpasien');
+Route::post('/kunjungan', [KunjunganPasienController::class, 'store']);
+Route::delete('/kunjungan/{id}', [KunjunganPasienController::class, 'destroy']);
+
 
 // Analytics Routes
 Route::get('/patient-demographics', function () {

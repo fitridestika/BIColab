@@ -25,14 +25,14 @@
       </li>
       
       <li class="menu-header">Data</li>
-      <li class="dropdown {{ request()->is('pbb') || request()->is('seasonal-trend') ? 'active' : '' }}">
+      <li class="dropdown {{ request()->is('pbb') || request()->is('pages.kunjunganpasien') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-procedures"></i> <span>Patient Care</span></a>
         <ul class="dropdown-menu">
           <li class="{{ request()->is('pbb') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('pbb.index') }}">Data PPB</a>
           </li>
-          <li class="{{ request()->is('seasonal-trend') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('seasonal.trend') }}">Tren Musiman</a>
+          <li class="{{ request()->is('pages.kunjunganpasien') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('pages.kunjunganpasien') }}">Tren Musiman</a>
           </li>
         </ul>
       </li>
